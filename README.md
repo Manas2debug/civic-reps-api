@@ -67,8 +67,6 @@ To meet the project requirements while ensuring robust data ingestion, this prot
   - Identify government level sections (U.S. Senate, U.S. House, NYS Senate, NYS Assembly, NYC Council) via heuristic keyword mapping on headings
   - Extract representative names while cleaning out extraneous address fragments
   - Explicitly include the NY Governor if referenced on the page
-- Outcome:
-  - Provides high-quality, complete data for ZIP 11354, fulfilling the project’s requirement to support 1–2 ZIP codes in depth.
 
 #### 2. Fallback Scrapers for Other U.S. ZIP Codes
 - For ZIP codes other than 11354, the agent uses multiple fallback sources:
