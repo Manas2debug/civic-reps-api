@@ -53,6 +53,40 @@ Defined in `server/src/db/schema.sql` with indexes. The database is populated by
 - Schema normalization: `geography`, `representatives`, and `rep_geography_map` to support many-to-many mappings and multiple government levels.
 - Defensive scraping: robust selectors, fallbacks to federal sources for arbitrary ZIPs, and basic data cleaning for names and titles.
 - API response includes `displayTitle` for easy UI rendering (e.g., "U.S. House Rep, NY-6").
+Scraping Design Overview
 
+To meet the project requirements while ensuring robust data ingestion, this prototype implements a two-tiered scraping strategy:
 
+1. Primary Scraper for ZIP 11354 (Flushing, Queens, NY)
 
+Target: NYC Queens CB4 Elected Officials
+
+Why: This page centrally lists federal, state, and local representatives for the 11354 area, enabling scraping of a comprehensive and accurate set of officials in one pass.
+
+Methods:
+
+Use Selenium + BeautifulSoup to:
+
+Fully load and wait for page content
+
+Detect the main content area
+
+Identify government level sections (U.S. Senate, U.S. House, NYS Senate, NYS Assembly, NYC Council) via heuristic keyword mapping
+
+Extract representative names while cleaning out extraneous address fragments
+
+Explicitly include the NY Governor if referenced on the page
+
+Outcome:
+Provides high-quality, complete data for ZIP 11354, fulfilling the project’s requirement to support 1–2 ZIP codes in depth.
+
+2. Fallback Scrapers for Other U.S. ZIP Codes
+
+For ZIP codes other than 11354, the agent uses multiple fallback sources:
+
+U.S. House of Representatives: ziplook.house.gov POST endpoint
+
+U.S. Senate: Scrapes senate.gov directory
+ to match senators by state
+
+Governors: Maps known governors by state (currently supports NY Governor Kathy Hochul)
