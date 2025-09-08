@@ -14,7 +14,7 @@ A prototype API and scraper that returns political representative details for a 
 ### Setup
 1) Create Python virtual environment and install deps
 ```
-cd /Users/manasmehta/Desktop/civic-reps-api
+cd /path/to/civic-reps-api
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
