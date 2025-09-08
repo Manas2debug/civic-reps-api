@@ -1,0 +1,13 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Node
+server/node_modules/
+
+# Data/runtime
+server/data/civic.db
+debug_*.*
+debug_page.html
+debug_screenshot.png
