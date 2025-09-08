@@ -41,11 +41,18 @@ Response includes `zip`, `city`, `state`, and a list of representatives with fie
 `name`, `title`, `office`, `party`, `branch`, `level`, and `displayTitle` (e.g., "U.S. House Rep, NY-6").
 
 ### Database Schema
-Defined in `server/src/db/schema.sql` with indexes. Seed examples in `server/src/db/seed.sql`.
+Defined in `server/src/db/schema.sql` with indexes. The database is populated by running the scraper.
 
 ### Notes
 - Prototype focuses on a small set of ZIP codes. Extend by adding more scrapers and normalizers.
 - For demo, ensure DB is populated before starting the API.
+
+### Design Choices
+- SQLite for simplicity and zero external dependencies in a prototype.
+- Separation of concerns: Python scraper populates DB; Node/Express serves read-only API.
+- Schema normalization: `geography`, `representatives`, and `rep_geography_map` to support many-to-many mappings and multiple government levels.
+- Defensive scraping: robust selectors, fallbacks to federal sources for arbitrary ZIPs, and basic data cleaning for names and titles.
+- API response includes `displayTitle` for easy UI rendering (e.g., "U.S. House Rep, NY-6").
 
 ### Demo
 - Record a short video showing scraping, API start, and a sample request.
